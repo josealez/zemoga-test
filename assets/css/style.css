@@ -1,0 +1,377 @@
+:root {
+  --altura: 500px;
+  --visible: none;
+  --fondoAzul: rgba(47, 190, 184);
+  --fondoAmarillo: rgba(255, 181, 51);
+  --repeticion: no-repeat;
+  --transparencia: transparent;
+  --translationNegative: translate(-260px);
+  --translationZero: translate(0);
+  --transition: all 0.5s;
+  --fullPercentage: 100%;
+}
+
+html {
+  font-size: 100%; /* 100% = 16px */
+}
+body {
+  margin: 0;
+}
+body.toggled {
+  overflow: hidden;
+}
+
+/*----------------------------Fonts ---------------------------*/
+@font-face {
+  font-family: LatoRegular;
+  src: url("../font/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: LatoLight;
+  src: url("../font/Lato-Light.ttf");
+}
+@font-face {
+  font-family: LatoBold;
+  src: url("../font/Lato-Bold.ttf");
+}
+
+
+.font-lato-light {
+  font-family: LatoLight;
+}
+.font-lato-bold {
+  font-family: LatoBold;
+}
+.font-lato-regular {
+  font-family: LatoRegular ;
+}
+
+/*--------------------------------------------------------------------*/
+/*-----------------------------------------Style Nav ---------------*/
+nav {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(88, 87, 85, 1) 100%
+  );
+}
+
+#sidebar-wrapper {
+  height: 100vh;
+  transform: var(--translationNegative);
+  -webkit-transform: var(--translationNegative);
+  -moz-transform: var(--translationNegative);
+  -ms-transform: var(--translationNegative);
+  -o-transform: var(--translationNegative);
+  position: absolute;
+  z-index: 9999;
+  transition: var(--transition);
+  -webkit-transition: var(--transition);
+  -moz-transition: var(--transition);
+  -ms-transition: var(--transition);
+  -o-transition: var(--transition);
+}
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+#main.toggled {
+  overflow: hidden;
+}
+#main.toggled #sidebar-wrapper {
+  transform: var(--translationZero);
+  -webkit-transform: var(--translationZero);
+  -moz-transform: var(--translationZero);
+  -ms-transform: var(--translationZero);
+  -o-transform: var(--translationZero);
+}
+.nav-item-responsive {
+  border-top-style: solid;
+  border-width: 0.5px;
+  border-color: white;
+}
+.nav-responsive {
+  display: var(--visible);
+}
+/*----------------------------------------- ---------------*/
+
+/*---------------------- Font size -----------------------------*/
+.size-little {
+  font-size: 0.8rem;
+}
+.size-medium {
+  font-size: 1.4rem;
+}
+.size-standard {
+  font-size: 1rem;
+}
+.size-regular {
+  font-size: 2rem;
+}
+.size-large {
+  font-size: 3rem;
+}
+.size-big {
+  font-size: 4rem;
+}
+/*---------------------------------------------------------------------*/
+
+/*--------------- Background color and style-----------*/
+.bg-black-obscure {
+  background-color: black;
+}
+.bg-black {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.bg-black-light {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.bg-blur {
+  backdrop-filter: blur(10px);
+}
+.bg-white-gray {
+  background-color: #ebebeb;
+}
+.bg-blue {
+  background-color: rgba(47, 190, 184, 0.75);
+}
+.bg-yellow {
+  background-color: rgba(255, 181, 51, 0.75);
+}
+.bg-white-light {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.bg-white-obscure {
+  background-color: rgba(255, 255, 255, 0.75);
+}
+.bg-blue-full {
+  background-color: var(--fondoAzul);
+}
+.bg-yellow-full {
+  background-color: var(--fondoAmarillo);
+}
+
+.bg-img {
+  background: rgb(88, 87, 85);
+  background: linear-gradient(
+    0deg,
+    rgba(88, 87, 85, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+.bg-cont-person {
+  height: 550px;
+  background-repeat: var(--repeticion);
+  background-position: center;
+  background-size: var(--fullPercentage);
+}
+.bg-persons {
+  background-image: url(../img/fondoGente.png);
+  background-repeat: var(--repeticion);
+  background-position: center;
+  background-size: var(--fullPercentage);
+}
+#bg-papa {
+  background-image: url(../img/header.png);
+  background-repeat: var(--repeticion);
+  background-size: var(--fullPercentage);
+}
+/*---------------------------------------------*/
+
+/*----------------- Text attributes ------------------*/
+.link {
+  text-decoration: underline;
+}
+a {
+  text-decoration: var(--visible);
+}
+.line-h {
+  line-height: 60px;
+}
+.hide-btn {
+  display: var(--visible);
+}
+/*-------------------Line style-----------*/
+.line-style {
+  border-style: dotted;
+}
+/*-----------------------------------------*/
+
+/*----------------------Button styles------------------------*/
+.btn-view {
+  border-width: 2px;
+  border-color: white;
+  border-style: solid;
+  background-color: var(--transparencia);
+}
+.btn-add {
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+  background-color: var(--transparencia);
+}
+.btn-like {
+  background-color: var(--fondoAzul);
+  border-style: var(--visible);
+  width: 44px;
+  box-sizing: border-box;
+}
+.btn-dislike {
+  background-color: var(--fondoAmarillo);
+  border-style: var(--visible);
+  width: 44px;
+  box-sizing: border-box;
+}
+
+
+*,
+*:focus,
+*:hover {
+  outline: var(--visible) !important;
+}
+.border-white {
+  border-style: solid ;
+  border-color: white;
+  border-width: 2px;
+}
+
+/*----------Colors-------------*/
+.color-black {
+  color: #464646;
+}
+/*------------------------icons style----------------------*/
+
+.iconUp {
+  padding-left: 1rem;
+}
+.iconDown {
+  padding-right: 1rem;
+}
+.cont-up {
+  flex-direction: row;
+  display: flex;
+}
+.cont-down {
+  flex-direction: row;
+  display: flex;
+  justify-content: flex-end;
+}
+.vote-buttons {
+  display: flex;
+  padding-left: 50px;
+}
+.vote-icon {
+  margin-right: 10px;
+}
+/*--------------------modal--------------*/
+.show {
+  display: block !important;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  border-radius: 20px !important;
+  background-color: rgba(0, 0, 0, 0.75) !important;
+}
+.btn-close {
+  border-width: 2px;
+  border-color: white;
+  border-style: solid;
+  background-color: var(--transparencia);
+}
+/*--------------------------------------*/
+
+/*----------------- Responsive -----------------*/
+
+@media (max-width: 1024px) {
+  .size-big {
+    font-size: 3rem;
+  }
+  .size-medium {
+    font-size: 1rem;
+  }
+  .size-regular {
+    font-size: 1.5rem;
+  }
+  .size-large {
+    font-size: 2rem;
+  }
+  #iconX {
+    display: var(--visible);
+  }
+  #bg-papa {
+    background-image: url(../img/popeFrancis.png);
+  }
+}
+
+@media (max-width: 768px) {
+  .vote-buttons {
+    padding-left: 70px;
+  }
+  .size-large {
+    font-size: 2rem;
+  }
+  .size-big {
+    font-size: 2rem;
+  }
+  .size-medium {
+    font-size: 1rem;
+  }
+  .size-regular {
+    font-size: 1.2rem;
+  }
+  #bg-papa {
+    background-image: url(../img/popeFrancis.png);
+  }
+  .bg-blur {
+    backdrop-filter: blur(0px);
+  }
+  .numPercentageLikes {
+    display: var(--visible) ;
+  }
+  .numPercentageDislikes {
+    display: var(--visible) ;
+  }
+}
+
+@media (max-width: 480px) {
+  .vote-buttons {
+    padding-left: 40px;
+  }
+  .size-large {
+    font-size: 2rem;
+  }
+  .size-big {
+    font-size: 2rem;
+  }
+  .size-medium {
+    font-size: 1rem;
+  }
+  .size-regular {
+    font-size: 1.5rem;
+  }
+  .bg-cont-person {
+    height: 500px;
+  }
+  .nav-responsive {
+    display: inherit;
+  }
+  .nav-screen {
+    display: var(--visible) !important;
+  }
+  #bg-papa {
+    background-image: url(../img/popeFrancis.png);
+  }
+  .line-h {
+    line-height: 30px;
+  }
+  .numPercentageLikes {
+    display: var(--visible) ;
+  }
+  .numPercentageDislikes {
+    display: var(--visible) ;
+  }
+}
