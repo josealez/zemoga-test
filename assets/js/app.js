@@ -15,7 +15,8 @@ let peopleList = [];
 let numLikes = 0;
 let numDislikes = 0;
 let voteId;
-
+let likes;
+let dislikes;
 //------------------------ Push all the data items in an array----------------//
 function loadPeopleData(data) {
   data.forEach((element) => {
@@ -33,15 +34,17 @@ function closeModal() {
 //-------------------------------Function called to close the modal----------------------------//
 
 //------------------------------------------Click event for the responsive menu-----------------------//
-document.getElementById("menu-toggle").addEventListener("click", function (event) {
-  event.preventDefault();
-  let nav = document.querySelector('#main');
-  let body = document.querySelector('body');
-  let content = document.querySelector('.content');
-  nav.classList.toggle('toggled');
-  body.classList.toggle('toggled');
-  content.classList.toggle('toggled');
-});
+document
+  .getElementById("menu-toggle")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    let nav = document.querySelector("#main");
+    let body = document.querySelector("body");
+    let content = document.querySelector(".content");
+    nav.classList.toggle("toggled");
+    body.classList.toggle("toggled");
+    content.classList.toggle("toggled");
+  });
 //------------------------------------------Click event for the responsive menu-----------------------//
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -60,14 +63,11 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem("numDislikes" + "-" + index, 0);
         }
 
-        let likes = localStorage.getItem("percentageLikes" + "-" + index);
-        let dislikes = localStorage.getItem("percentageDislikes" + "-" + index);
+        likes = localStorage.getItem("percentageLikes" + "-" + index);
+        dislikes = localStorage.getItem("percentageDislikes" + "-" + index);
         if (likes != null && dislikes != null) {
-          let x = document.getElementById(index);
-          x.querySelector(".likesProgress").style.width = likes + "%";
-          x.querySelector(".dislikesProgress").style.width = dislikes + "%";
-          x.querySelector(".numPercentageLikes").innerHTML = likes + "%";
-          x.querySelector(".numPercentageDislikes").innerHTML = dislikes + "%";
+          let person = document.getElementById(index);
+          this.updatePercentage(person, likes);
         }
       },
       /*---------------------------------------------- Update votes -----------------*/
@@ -78,19 +78,32 @@ document.addEventListener("DOMContentLoaded", function () {
         numLikes = 0;
         numDislikes = 0;
 
-        let x = document.getElementById(id);
-        if (thumbs === "like") {//verfify if the user pressed the like button
+        let person = document.getElementById(id);
+        if (thumbs === "like") {
+          //verfify if the user pressed the like button
           numLikes = 1;
           numDislikes = 0;
-          x.querySelector(".btn-like").classList.add("border-white");
-          x.querySelector(".btn-dislike").classList.remove("border-white");
+          person.querySelector(".btn-like").classList.add("border-white");
+          person.querySelector(".btn-dislike").classList.remove("border-white");
         } else if (thumbs === "dislike") {
           //verfify if the user pressed the dislike button
           numLikes = 0;
           numDislikes = 1;
-          x.querySelector(".btn-like").classList.remove("border-white");
-          x.querySelector(".btn-dislike").classList.add("border-white");
+          person.querySelector(".btn-like").classList.remove("border-white");
+          person.querySelector(".btn-dislike").classList.add("border-white");
         }
+        peopleList.forEach((element) => {
+          if (id !== element.id) {
+            document
+              .getElementById(element.id)
+              .querySelector(".btn-like")
+              .classList.remove("border-white");
+            document
+              .getElementById(element.id)
+              .querySelector(".btn-dislike")
+              .classList.remove("border-white");
+          }
+        });
       },
       /*---------------------------------------------- Selection of likes or dislike--------------*/
       /*---------------------------------------------- Likes & dislikes percentage calculation--------------*/
@@ -99,11 +112,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let percentageInteger;
         let totalLikes = localStorage.getItem("numLikes" + "-" + id); //get the number of likes
         let totalDislikes = localStorage.getItem("numDislikes" + "-" + id); //get the number of dislikes
-        let x = document.getElementById(id);
-        var arrayBtn = x.querySelectorAll(".vote-icon");
+        let person = document.getElementById(id);
+        var arrayBtn = person.querySelectorAll(".vote-icon");
 
         if (
-          document.getElementById(id).querySelector(".btn-view").innerHTML !=
+          document.getElementById(id).querySelector(".btn-view").innerHTML !==
           "Vote again"
         ) {
           // verify if the user already voted
@@ -111,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // verify if the like or dislike button pressed and the vote now button are associated to the same person
             arrayBtn[0].classList.add("hide-btn"); // hide the like and dislike buttons
             arrayBtn[1].classList.add("hide-btn"); // hide the like and dislike buttons
-            x.querySelector(".btn-view").innerHTML = "Vote again"; // change the text of the vote now button
+            person.querySelector(".btn-view").innerHTML = "Vote again"; // change the text of the vote now button
             if (numLikes === 1) {
               localStorage.setItem(
                 "numLikes" + "-" + id,
@@ -139,34 +152,58 @@ document.addEventListener("DOMContentLoaded", function () {
               "percentageDislikes" + "-" + id,
               100 - percentageInteger
             );
-            x.querySelector(".likesProgress").style.width =
-              percentageInteger + "%"; //update the text and with of the likes and dislikes bar
-            x.querySelector(".dislikesProgress").style.width =
-              100 - percentageInteger + "%";
-            x.querySelector(".numPercentageLikes").innerHTML =
-              percentageInteger + "%";
-            x.querySelector(".numPercentageDislikes").innerHTML =
-              100 - percentageInteger + "%";
+            this.updatePercentage(person, percentageInteger);
+            this.tagThumbs(id);
             document.getElementById("modalVote").classList.add("show");
             voteAgain = true;
           }
         } else {
           arrayBtn[0].classList.remove("hide-btn");
           arrayBtn[1].classList.remove("hide-btn");
-          x.querySelector(".btn-view").innerHTML = "Vote now";
-          x.querySelector(".btn-like").classList.remove("border-white");
-          x.querySelector(".btn-dislike").classList.remove("border-white");
-          x.querySelector(".btn-view").innerHTML = "Vote now";
+          person.querySelector(".btn-view").innerHTML = "Vote now";
+          person.querySelector(".btn-like").classList.remove("border-white");
+          person.querySelector(".btn-dislike").classList.remove("border-white");
+          person.querySelector(".btn-view").innerHTML = "Vote now";
         }
 
         /*---------------------------------------------- Likes & dislikes percentage calculation--------------*/
       },
+      //----------------------------------------------- Change tag thumbs of each person---------------//
+      tagThumbs: function (id) {
+        let person = document.getElementById(id);
+        likes = parseInt(localStorage.getItem("percentageLikes" + "-" + id));
+        dislikes = parseInt(
+          localStorage.getItem("percentageDislikes" + "-" + id)
+        );
+        if (likes < dislikes) {
+          person.querySelector(".tagThumbs").src = "assets/img/iconDown.png";
+          person.querySelector(".tagThumbs").classList.remove("bg-blue-full");
+          person.querySelector(".tagThumbs").classList.add("bg-yellow-full");
+        } else {
+          person.querySelector(".tagThumbs").src = "assets/img/iconUp.png";
+          person.querySelector(".tagThumbs").classList.add("bg-blue-full");
+          person.querySelector(".tagThumbs").classList.remove("bg-yellow-full");
+        }
+      },
+      //--------------------------------------Update percentage ---------------------//
+      updatePercentage: function (person, percentageInteger) {
+        person.querySelector(".likesProgress").style.width =
+          percentageInteger + "%"; //update the text and with of the likes and dislikes bar
+        person.querySelector(".dislikesProgress").style.width =
+          100 - percentageInteger + "%";
+        person.querySelector(".numPercentageLikes").innerHTML =
+          percentageInteger + "%";
+        person.querySelector(".numPercentageDislikes").innerHTML =
+          100 - percentageInteger + "%";
+      },
+      //--------------------------------------Update percentage ---------------------//
     },
+    //----------------------------------------------- Change tag thumbs of each person---------------//
     updated() {
-      this.updateVotes("1");
-      this.updateVotes("2");
-      this.updateVotes("3");
-      this.updateVotes("4");
+      peopleList.forEach((element) => {
+        this.updateVotes(element.id);
+        this.tagThumbs(element.id);
+      });
     },
   });
 });

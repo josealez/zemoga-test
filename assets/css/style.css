@@ -228,11 +228,6 @@ a {
 }
 
 
-*,
-*:focus,
-*:hover {
-  outline: var(--visible) !important;
-}
 .border-white {
   border-style: solid ;
   border-color: white;
@@ -305,6 +300,9 @@ a {
   #bg-papa {
     background-image: url(../img/popeFrancis.png);
   }
+  .line-h {
+    line-height: 35px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -359,19 +357,20 @@ a {
   .nav-responsive {
     display: inherit;
   }
-  .nav-screen {
-    display: var(--visible) !important;
-  }
+  
   #bg-papa {
     background-image: url(../img/popeFrancis.png);
   }
   .line-h {
-    line-height: 30px;
+    line-height: 35px;
   }
   .numPercentageLikes {
     display: var(--visible) ;
   }
   .numPercentageDislikes {
     display: var(--visible) ;
+  }
+  .nav-screen {
+    display: var(--visible) !important;
   }
 }
