@@ -1,8 +1,8 @@
 :root {
   --altura: 500px;
   --visible: none;
-  --fondoAzul: rgba(47, 190, 184);
-  --fondoAmarillo: rgba(255, 181, 51);
+  --fondoAzul: rgb(47, 190, 184);
+  --fondoAmarillo: rgb(255, 181, 51);
   --repeticion: no-repeat;
   --transparencia: transparent;
   --translationNegative: translate(-260px);
