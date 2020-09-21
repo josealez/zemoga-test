@@ -1,0 +1,26 @@
+[
+    {
+      "id":1,  
+      "name": "Kanye West",
+      "photo": "kanye.png",
+      "description": "Kanye West is a Grammy Award-winning rapper and record producer and fashion designer. "
+    },
+    {
+      "id":2,    
+      "name": "Mark Zuckerberg",
+      "photo": "mark.png",
+      "description": "Co-founder and CEO of the social-networking website Facebook, as well as one of the world's youngest billionaires."
+    },
+    {
+      "id":3,    
+      "name": "Cristina Fernández de Kirchner",
+      "photo": "cristina.png",
+      "description": "Ms Fernández took over the presidency in 2007, succeeding her late husband Nestor Kirchner."
+    },
+    {
+      "id":4,  
+      "name": "Malala Yousafzai",
+      "photo": "malala.png",
+      "description": "She is a human rights activist who advocates for the rights of women and girls and worldwide access to education."
+    }
+  ]
